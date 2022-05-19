@@ -13,10 +13,12 @@ import java.util.List;
 public class LeetCode19 {
 
 	public static void main(String[] args) {
-		int[] b = new int[] { 4,1,2,1,2 };
+		int[] b = new int[] { 0,1 };
+		int[] c = new int[] { 9, 6, 4, 2, 3, 5, 7, 0, 1 };
 		//majorityElement(b);
 		//singleNumber(b);
-		findDuplicate(b);
+		//findDuplicate(b);
+		missingNumber(b);
 	}
 
 	// Q229
@@ -113,15 +115,36 @@ public class LeetCode19 {
 		System.out.println(re[0]);
 
 	}
+
 	public static void findDuplicate(int[] nums) {
 
 		Arrays.sort(nums);
 
-		for(int i=1; i< nums.length; i++){
-			if(nums[i] == nums[i-1]){
+		for (int i = 1; i < nums.length; i++) {
+			if (nums[i] == nums[i - 1]) {
 				System.out.println(nums[i]);
 				break;
 			}
 		}
+	}
+
+	public static void missingNumber(int[] nums) {
+		Arrays.sort(nums);
+
+		int result = 0;
+		int count = 0;
+
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] != (i+1)-1) {
+				result = nums[i] - 1;
+				break;
+			}else{
+				count++;
+			}
+		}
+		if(count == nums.length){
+			result = nums[nums.length-1]+1;
+		}
+		System.out.println(result);
 	}
 }
