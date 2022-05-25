@@ -1,4 +1,4 @@
-package com.datastructures;
+package com.datastructures.may;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;

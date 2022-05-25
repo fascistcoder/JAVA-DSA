@@ -3,6 +3,7 @@ package com.datastructures.may;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -87,9 +88,7 @@ public class LeetCode24 {
 	}
 
 	public static int firstMissingPositive(int[] nums) {
-		int[] filteredArray = Arrays.stream(nums).filter((num) -> {
-			return num > 0;
-		}).distinct().sorted().toArray();
+		int[] filteredArray = Arrays.stream(nums).filter((num) -> num > 0).distinct().sorted().toArray();
 		int res = 0;
 		int c = 0;
 
@@ -110,9 +109,39 @@ public class LeetCode24 {
 		}
 	}
 
+	public static void firstRecurringElement(int[] nums){
+
+		if(nums.length == 0 || nums.length ==1){
+			System.out.println(-1);
+		}
+
+		HashSet<Integer> hashSet = new HashSet<>();
+
+		int result = 0;
+
+		for(int num : nums){
+			if(hashSet.contains(num)){
+				result = num;
+				break;
+			}
+			hashSet.add(num);
+		}
+
+		if(result == 0){
+			System.out.println(-1);
+		}else{
+			System.out.println(result);
+		}
+
+		List<String> result1 = new LinkedList<>();
+
+	}
+
 	public static void main(String[] args) {
-		int[] a = new int[] { 0, 2, 2, 1, 1 };
-		System.out.println(firstMissingPositive(a));
+		int[] a = new int[] { 2,5,5,3,4,5 };
+		//System.out.println(firstMissingPositive(a));
+
+		firstRecurringElement(a);
 	}
 }
 
