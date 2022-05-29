@@ -84,6 +84,8 @@ public class SinglyLinkedList {
 			return;
 		}
 
+		int c= 1;
+
 		ListNode currentNode = head;
 		System.out.print(currentNode.getVal());
 
@@ -92,8 +94,10 @@ public class SinglyLinkedList {
 		while (currentNode != null) {
 			System.out.print("->" + currentNode.getVal());
 			currentNode = currentNode.getNext();
+			c++;
 		}
 		System.out.println();
+		System.out.println(c);
 	}
 
 	public void deleteNode(ListNode node){
@@ -103,11 +107,10 @@ public class SinglyLinkedList {
 
 	public static void main(String[] args) {
 		SinglyLinkedList singlyLinkedList = new SinglyLinkedList(5);
+		singlyLinkedList.printList();
 		singlyLinkedList.append(10);
 		singlyLinkedList.prepend(2);
 		singlyLinkedList.insert(7, 1);
-		singlyLinkedList.printList();
-		singlyLinkedList.remove(0);
 		singlyLinkedList.printList();
 
 
