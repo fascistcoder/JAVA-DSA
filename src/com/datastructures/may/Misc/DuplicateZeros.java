@@ -1,4 +1,4 @@
-package com.datastructures.may;
+package com.datastructures.may.Misc;
 
 import java.util.Arrays;
 

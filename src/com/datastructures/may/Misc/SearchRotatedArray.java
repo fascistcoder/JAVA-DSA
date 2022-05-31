@@ -1,4 +1,4 @@
-package com.datastructures.may;
+package com.datastructures.may.Misc;
 
 /**
  * @author <a>Pulkit Aggarwal</a>
