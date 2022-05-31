@@ -1,6 +1,6 @@
 package com.datastructures;
 
-import java.util.stream.IntStream;
+import com.datastructures.may.Misc.DataStructure;
 
 public class Main {
 

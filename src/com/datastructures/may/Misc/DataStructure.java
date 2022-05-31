@@ -1,6 +1,5 @@
-package com.datastructures;
+package com.datastructures.may.Misc;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -39,7 +38,6 @@ public class DataStructure {
 		System.out.println(stringBuilder.append(str).reverse().toString());
 	}
 
-
 	// remove duplicates by array because map does not store duplicates
 	public void mergeTwoArrayByMap(int[] a, int[] b) {
 		Map<Integer, Boolean> map = new TreeMap<Integer, Boolean>();
@@ -53,46 +51,6 @@ public class DataStructure {
 		for (Map.Entry<Integer, Boolean> me : map.entrySet()) {
 			System.out.println(me.getKey() + " ");
 		}
-	}
-
-
-}
-
-class MyArray {
-	int length;
-	Object[] data;
-	int capacity;
-
-	public MyArray() {
-		length = 0;
-		data = new Object[1];
-		capacity = 1;
-	}
-
-	public Object get(int index) {
-		return data[index];
-	}
-
-	public void push(Object obj) {
-		if (capacity == length) {
-			data = Arrays.copyOf(data, capacity * 2);
-			capacity *= 2;
-		}
-		data[length] = obj;
-		length++;
-	}
-
-	public void pop() {
-		data[length - 1] = null;
-		length--;
-	}
-
-	public void delete(int index) {
-		if (length - 1 - index >= 0) {
-			System.arraycopy(data, index + 1, data, index, length - 1 - index);
-		}
-		data[length - 1] = null;
-		length--;
 	}
 
 }
