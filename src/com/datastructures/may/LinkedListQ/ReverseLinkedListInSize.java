@@ -51,7 +51,7 @@ public class ReverseLinkedListInSize {
 		return arr;
 	}
 
-	// Using recusion
+	// Using recursion
 	public static RemoveLoopInLinkedList.Node reverseRecursion(RemoveLoopInLinkedList.Node node, int k){
 		RemoveLoopInLinkedList.Node current = node;
 		RemoveLoopInLinkedList.Node prev = null;
