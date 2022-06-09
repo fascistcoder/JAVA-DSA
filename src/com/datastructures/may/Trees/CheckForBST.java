@@ -1,7 +1,5 @@
 package com.datastructures.may.Trees;
 
-
-
 /**
  * @author <a>Pulkit Aggarwal</a>
  * @version 1.0
@@ -27,4 +25,6 @@ public class CheckForBST {
 		}
 		return isValidBST(root.left, minVal, root.data) && isValidBST(root.right, root.data, maxVal);
 	}
+
+
 }
