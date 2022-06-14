@@ -1,6 +1,6 @@
 package com.datastructures.june;
 
-import com.datastructures.june.misc.KadaneAlgorithm;
+import com.datastructures.june.misc.MaxSumSubarray;
 
 /**
  * @author <a>Pulkit Aggarwal</a>
@@ -10,9 +10,12 @@ import com.datastructures.june.misc.KadaneAlgorithm;
 public class MainClass {
 	public static void main(String[] args) {
 
-		int[] a = new int[] { -47, 43, 94, -94, -93, -59, 31, -86 };
+		int[] a = new int[] { 1, 2, 1, 3, 4, 2, 3 };
 
-		KadaneAlgorithm kadaneAlgorithm = new KadaneAlgorithm();
-		System.out.println(kadaneAlgorithm.maxSubarraySum(a, a.length));
+		//		KadaneAlgorithm kadaneAlgorithm = new KadaneAlgorithm();
+		//		System.out.println(kadaneAlgorithm.maxSubarraySum(a, a.length));
+
+		MaxSumSubarray maxSumSubarray = new MaxSumSubarray();
+		System.out.println(maxSumSubarray.countDistinct(a, a.length, 4));
 	}
 }
