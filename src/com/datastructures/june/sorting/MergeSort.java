@@ -40,7 +40,7 @@ public class MergeSort {
 			rightArray[j] = a[mid + 1 + j];
 		}
 
-		int i = 0, j = 0, k = 0;
+		int i = 0, j = 0, k = left;
 
 		while (i < leftArraySize && j < rightArraySize) {
 			if (leftArray[i] < rightArray[j]) {
