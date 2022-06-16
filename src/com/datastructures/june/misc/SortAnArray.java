@@ -11,7 +11,7 @@ import java.util.TreeMap;
  * @since 16/06/22
  */
 public class SortAnArray {
-	public static int[] sortA1ByA2(int A1[], int N, int A2[], int M) {
+	public static int[] sortA1ByA2(int[] A1, int N, int[] A2, int M) {
 
 		SortedMap<Integer, Integer> hashMap = new TreeMap<>();
 
