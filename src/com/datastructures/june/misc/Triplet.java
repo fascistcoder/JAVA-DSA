@@ -1,6 +1,5 @@
 package com.datastructures.june.misc;
 
-import java.util.Arrays;
 import java.util.HashSet;
 
 /**
@@ -10,8 +9,7 @@ import java.util.HashSet;
  */
 public class Triplet {
 	public boolean findTriplets(int arr[], int n) {
-		//add code here.
-		Arrays.sort(arr);
+		//add code here
 
 		HashSet<Integer> hashSet = new HashSet<>();
 
@@ -31,4 +29,5 @@ public class Triplet {
 
 		return false;
 	}
+
 }
