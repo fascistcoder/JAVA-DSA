@@ -7,8 +7,7 @@ package com.datastructures.may.Trees;
  */
 public class CheckForBST {
 
-	boolean isBST(BinaryNodeGfg.Node root)
-	{
+	boolean isBST(BinaryNodeGfg.Node root) {
 		int maxVal = Integer.MAX_VALUE;
 		int minVal = Integer.MIN_VALUE;
 
@@ -16,15 +15,21 @@ public class CheckForBST {
 
 	}
 
-	public static boolean isValidBST(BinaryNodeGfg.Node root, long minVal, long maxVal){
-		if(root == null){
+	public static boolean isValidBST(BinaryNodeGfg.Node root, long minVal, long maxVal) {
+		if (root == null) {
 			return true;
 		}
-		if(root.data >= maxVal || root.data <=minVal){
+		if (root.data >= maxVal || root.data <= minVal) {
 			return false;
 		}
 		return isValidBST(root.left, minVal, root.data) && isValidBST(root.right, root.data, maxVal);
 	}
 
-
+	/* 1. BFS
+	2. DFS  sol - BFS
+	3. BFS  sol - DFS
+	4. DFS
+	5. DFS
+	6. BFS
+	*/
 }
