@@ -6,8 +6,8 @@ package com.datastructures.may.LinkedListQ;
  * @since 28/05/22
  */
 public class ListNode {
-	private int val;
-	private ListNode next;
+	public int val;
+	public ListNode next;
 
 	public ListNode(int val) {
 		this.val = val;
