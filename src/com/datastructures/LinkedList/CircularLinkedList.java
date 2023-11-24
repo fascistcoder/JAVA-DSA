@@ -108,7 +108,6 @@ public class CircularLinkedList {
 	public void deleteCLL(int location) {
 		if (head == null) {
 			System.out.println("CLL does not exist");
-			return;
 		}else if(location == 0){
 			Node first = head;
 			head = first.next;
@@ -133,7 +132,6 @@ public class CircularLinkedList {
 			tempNode.next = head;
 			tail = tempNode;
 			size--;
-			return;
 		}else {
 			Node tempNode = head;
 			for(int i = 0;  i< location -1 ; i++){
@@ -146,10 +144,13 @@ public class CircularLinkedList {
 	}
 
 	public void deleteEntireCLL() {
+		if (head == null) {
+			System.out.println("CLL does not exist");
+			return;
+		}
 		head = null;
 		tail.next = null;
 		tail = null;
 		System.out.println("Entire Linked lIst deleted successfully");
-
 	}
 }

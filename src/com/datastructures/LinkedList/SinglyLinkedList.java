@@ -15,10 +15,10 @@ public class SinglyLinkedList {
 		singlyLinkedList.createSinglyLinkedList(1);
 		singlyLinkedList.insertInSingleLinkedList(1, 1);
 		singlyLinkedList.insertInSingleLinkedList(2, 2);
-		singlyLinkedList.insertInSingleLinkedList(1, 3);
-		singlyLinkedList.insertInSingleLinkedList(5, 4);
-		singlyLinkedList.insertInSingleLinkedList(1, 4);
-		singlyLinkedList.insertInSingleLinkedList(2, 5);
+		singlyLinkedList.insertInSingleLinkedList(6, 3);
+		singlyLinkedList.insertInSingleLinkedList(3, 4);
+		singlyLinkedList.insertInSingleLinkedList(4, 4);
+		singlyLinkedList.insertInSingleLinkedList(5, 5);
 		singlyLinkedList.insertInSingleLinkedList(6, 6);
 
 		singlyLinkedList.traverseLinkedList();
@@ -36,9 +36,10 @@ public class SinglyLinkedList {
 		singlyLinkedList.removeNthFromEnd(2);
 		System.out.println(singlyLinkedList.isPalindrome());
 		singlyLinkedList.isPalindrome();
+		singlyLinkedList.removeElements(1);
 		singlyLinkedList.traverseLinkedList();
 
-		System.out.println(singlyLinkedList.isPalindrome("A man, a plan, a canal: Panama"));
+		//		System.out.println(singlyLinkedList.isPalindrome("A man, a plan, a canal: Panama"));
 	}
 
 	public Node createSinglyLinkedList(int nodeVal) {
@@ -443,5 +444,35 @@ public class SinglyLinkedList {
 		System.out.println(rev);
 		System.out.println(modify);
 		return modify.equals(rev);
+	}
+
+	public void removeElements(int val) {
+		if (head == null) {
+			return;
+		}
+
+		if (head.next == null && head.value == val) {
+			return;
+		}
+
+		if (head.next == null) {
+			return;
+		}
+
+		while (head != null && head.value == val) {
+			head = head.next;
+		}
+
+		Node temp = head;
+		Node prev = null;
+
+		while (temp != null) {
+			if (temp.value == val) {
+				prev.next = temp.next;
+			} else {
+				prev = temp;
+			}
+			temp = temp.next;
+		}
 	}
 }
