@@ -28,7 +28,7 @@ public class CircularLinkedList {
 		circularLinkedList.traverseCLL();
 	}
 
-	public Node createCSLL(int val) {
+	public void createCSLL(int val) {
 		head = new Node();
 		Node node = new Node();
 		node.value = val;
@@ -36,7 +36,6 @@ public class CircularLinkedList {
 		head = node;
 		tail = node;
 		size = 1;
-		return head;
 	}
 
 	public void insertInCLL(int val, int location) {
