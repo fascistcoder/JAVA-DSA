@@ -1,6 +1,6 @@
 package com.datastructures;
 
-import com.datastructures.may.Misc.DataStructure;
+import com.datastructures.months2022.may.Misc.DataStructure;
 
 public class Main {
 

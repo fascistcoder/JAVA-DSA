@@ -1,7 +1,9 @@
 package com.datastructures.Arrays;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 /**
  * @author <a>Pulkit Aggarwal</a>
@@ -20,8 +22,9 @@ public class ArrayCodingExercise {
 		//
 		//		System.out.println(Arrays.toString(middle(arr)));
 
-		int[] array = new int[] { 7, 6, 4, 3, 1 };
-		System.out.println(maxProfit(array));
+		int[] nums1 = new int[] { 1, 2, 3, 0, 0, 0 };
+		int[] nums2 = new int[] { 2, 5, 6 };
+		merge(nums1, 3, nums2, 3);
 	}
 
 	public static int[] middle(int[] arr) {
@@ -231,6 +234,79 @@ public class ArrayCodingExercise {
 			}
 		}
 		return -1;
+	}
+
+	public static int majorityElement(int[] nums) {
+		Map<Integer, Integer> map = new HashMap<>();
+
+		for (int num : nums) {
+			map.put(num, map.getOrDefault(num, 0) + 1);
+		}
+
+		System.out.println(map);
+
+		for (int num : nums) {
+			if (map.get(num) > nums.length / 2) {
+				return num;
+			}
+		}
+
+		return -1;
+	}
+
+	public static void merge(int[] nums1, int m, int[] nums2, int n) {
+
+		if (m == 1 && n == 0) {
+			return;
+		}
+
+		if (m == 0 && n == 1) {
+			nums1[0] = nums2[0];
+			return;
+		}
+
+		int i = 0;
+		int j = 0;
+		int k = 0;
+		int[] res = new int[m + n];
+
+		while (i < m && j < n) {
+			if (nums1[i] < nums2[j]) {
+				res[k++] = nums1[i];
+				i++;
+			} else {
+				res[k++] = nums2[j];
+				j++;
+			}
+		}
+		while (i < m) {
+			res[k++] = nums1[i++];
+		}
+
+		while (j < n) {
+			res[k++] = nums2[j++];
+		}
+
+		int l = 0;
+
+		for (int num : res) {
+			nums1[l] = num;
+			l++;
+		}
+
+	}
+
+	public int[] sortedSquares(int[] nums) {
+		int[] res = new int[nums.length];
+		int i = 0;
+
+		for (int num : nums) {
+			res[i] = num * num;
+			i++;
+		}
+
+		Arrays.sort(res);
+		return res;
 	}
 
 }
