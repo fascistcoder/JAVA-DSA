@@ -580,4 +580,15 @@ public class LinkedListProblems {
 			temp = temp.next;
 		}
 	}
+	public Node reverseBetween(Node head, int left, int right) {
+		if(head == null){
+			return null;
+		}
+		if(head.next == null){
+			return head;
+		}
+
+
+		return null;
+	}
 }

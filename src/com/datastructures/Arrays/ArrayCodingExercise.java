@@ -22,9 +22,9 @@ public class ArrayCodingExercise {
 		//
 		//		System.out.println(Arrays.toString(middle(arr)));
 
-		int[] nums1 = new int[] { 1, 2, 3, 0, 0, 0 };
+		int[] nums1 = new int[] { 1,3,4,2,2};
 		int[] nums2 = new int[] { 2, 5, 6 };
-		merge(nums1, 3, nums2, 3);
+		findDuplicate(nums1);
 	}
 
 	public static int[] middle(int[] arr) {
@@ -307,6 +307,24 @@ public class ArrayCodingExercise {
 
 		Arrays.sort(res);
 		return res;
+	}
+
+	public static int findDuplicate(int[] nums) {
+		int slow = nums[0];
+		int fast = nums[0];
+
+		do{
+			slow = nums[slow];
+			fast = nums[nums[fast]];
+		}while (slow != fast);
+
+		slow = nums[0];
+		while (slow != fast){
+			slow = nums[slow];
+			fast = nums[fast];
+		}
+
+		return slow;
 	}
 
 }
