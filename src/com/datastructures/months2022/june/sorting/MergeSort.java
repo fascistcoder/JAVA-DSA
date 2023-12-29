@@ -8,6 +8,7 @@ import java.util.Arrays;
  * @since 15/06/22
  */
 public class MergeSort {
+
 	public static void mergeSort(int[] a, int left, int right) {
 
 		if (a.length == 1) {

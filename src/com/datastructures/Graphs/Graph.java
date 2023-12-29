@@ -30,19 +30,35 @@ public class Graph {
 		graphNodeArrayList.add(new GraphNode("C", 2));
 		graphNodeArrayList.add(new GraphNode("D", 3));
 		graphNodeArrayList.add(new GraphNode("E", 4));
+		graphNodeArrayList.add(new GraphNode("F", 5));
+		graphNodeArrayList.add(new GraphNode("G", 6));
+		graphNodeArrayList.add(new GraphNode("H", 7));
 
-		Graph graph = new Graph(graphNodeArrayList);
-		graph.addUndirectedEdge(0, 1);
-		graph.addUndirectedEdge(0, 2);
-		graph.addUndirectedEdge(0, 3);
-		graph.addUndirectedEdge(1, 4);
-		graph.addUndirectedEdge(2, 3);
-		graph.addUndirectedEdge(3, 4);
+//		Graph graph = new Graph(graphNodeArrayList);
+//		graph.addUndirectedEdge(0, 1);
+//		graph.addUndirectedEdge(0, 2);
+//		graph.addUndirectedEdge(0, 3);
+//		graph.addUndirectedEdge(1, 4);
+//		graph.addUndirectedEdge(2, 3);
+//		graph.addUndirectedEdge(3, 4);
+//
+//		System.out.println(graph.toString());
 
-		System.out.println(graph.toString());
+		Graph graph1 = new Graph(graphNodeArrayList);
+		graph1.addDirectEdge(0, 2);
+		graph1.addDirectEdge(2, 4);
+		graph1.addDirectEdge(4, 7);
+		graph1.addDirectEdge(4, 5);
+		graph1.addDirectEdge(5, 6);
+		graph1.addDirectEdge(1, 2);
+		graph1.addDirectEdge(1, 3);
+		graph1.addDirectEdge(3, 5);
 
-		graph.bfs();
-		graph.dfs();
+		System.out.println(graph1.toString());
+		graph1.topologicalSort();
+
+		graph1.bfs();
+		graph1.dfs();
 
 	}
 
@@ -124,4 +140,32 @@ public class Graph {
 		}
 	}
 
+	//TODO Topological Sort
+	public void addDirectEdge(int i, int j){
+		adjacencyMatrix[i][j] = 1;
+	}
+
+	void topologicalVisit(GraphNode node, Stack<GraphNode>stack){
+		ArrayList<GraphNode> neighbors = getNeighbors(node);
+		for (GraphNode neighbour : neighbors) {
+			if (!neighbour.isVisited) {
+				topologicalVisit(neighbour, stack);
+			}
+		}
+		node.isVisited = true;
+		stack.push(node);
+	}
+
+	void topologicalSort(){
+		Stack<GraphNode> stack = new Stack<>();
+		for(GraphNode node : nodeArrayList){
+			if(!node.isVisited){
+				topologicalVisit(node, stack);
+			}
+		}
+
+		while (!stack.isEmpty()){
+			System.out.print(stack.pop().name + " ");
+		}
+	}
 }

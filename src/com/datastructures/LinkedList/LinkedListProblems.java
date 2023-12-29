@@ -1,6 +1,9 @@
 package com.datastructures.LinkedList;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * @author <a>Pulkit Aggarwal</a>
@@ -15,13 +18,14 @@ public class LinkedListProblems {
 	public static void main(String[] args) {
 		LinkedListProblems linkedListProblems = new LinkedListProblems();
 
-		linkedListProblems.create(5);
-		linkedListProblems.insertNode(10);
-		linkedListProblems.insertNode(15);
-		linkedListProblems.insertNode(20);
-		linkedListProblems.insertNode(25);
-
-		linkedListProblems.set(0, 3);
+		linkedListProblems.create(1);
+		linkedListProblems.insertNode(2);
+		linkedListProblems.insertNode(3);
+		linkedListProblems.insertNode(3);
+		linkedListProblems.insertNode(4);
+		linkedListProblems.insertNode(4);
+		linkedListProblems.insertNode(5);
+		linkedListProblems.traverse();
 
 		linkedListProblems.traverse();
 	}
@@ -88,7 +92,7 @@ public class LinkedListProblems {
 			longer = longer.next;
 		}
 
-		while (longer != shorter){
+		while (longer != shorter) {
 			longer = longer.next;
 			shorter = shorter.next;
 		}
@@ -580,15 +584,116 @@ public class LinkedListProblems {
 			temp = temp.next;
 		}
 	}
-	public Node reverseBetween(Node head, int left, int right) {
-		if(head == null){
+
+	public ListNode deleteDuplicates(ListNode head) {
+		if (head == null || head.next == null) {
 			return null;
 		}
-		if(head.next == null){
+
+		ListNode dummy = new ListNode(0);
+		dummy.next = head;
+		ListNode current = dummy;
+
+		while (current.next != null && current.next.next != null) {
+			if (current.next.val == current.next.next.val) {
+				int dupVal = current.next.val;
+				while (current.next != null && current.next.val == dupVal) {
+					current.next = current.next.next;
+				}
+			} else {
+				current = current.next;
+			}
+		}
+		return dummy.next;
+	}
+
+	public ListNode sortList(ListNode head) {
+		ListNode temp = head;
+		List<Integer> list = new ArrayList<>();
+
+		while (temp != null) {
+			list.add(temp.val);
+			temp = temp.next;
+		}
+
+		list.sort(Collections.reverseOrder());
+
+		head = null;
+
+		for (Integer integer : list) {
+			ListNode newNode = new ListNode(integer);
+			newNode.next = head;
+			head = newNode;
+		}
+		return head;
+	}
+
+	public ListNode reverseBetween(ListNode head, int left, int right) {
+		if (head.next == null) {
 			return head;
 		}
 
+		List<Integer> list = new ArrayList<>();
+		ListNode leftTemp = head;
+		for (int i = 0; i < left; i++) {
+			leftTemp = leftTemp.next;
+		}
+
+		for (int i = left; i < right; i++) {
+			list.add(leftTemp.val);
+			leftTemp = leftTemp.next;
+		}
+
+		Collections.reverse(list);
 
 		return null;
+	}
+
+	public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+		if (list1 == null && list2 == null) {
+			return null;
+		}
+
+		if (list1 == null && list2.next == null) {
+			return list2;
+		}
+
+		if (list1.next == null && list2 == null) {
+			return list1;
+		}
+
+		ListNode l1 = list1;
+		ListNode l2 = list2;
+
+		ListNode mergeList = new ListNode();
+		if (l1.val < l2.val) {
+			mergeList = l1;
+			l1 = l1.next;
+		} else {
+			mergeList = l2;
+			l2 = l2.next;
+		}
+		ListNode current = mergeList;
+
+		while (l1 != null && l2 != null) {
+			if (l1.val < l2.val) {
+				current.next = l1;
+				l1 = l1.next;
+			} else {
+				current.next = l2;
+				l2 = l2.next;
+			}
+			current = current.next;
+		}
+
+		if (l1 != null) {
+			current.next = l1;
+		}
+
+		if (l2 != null) {
+			current.next = l2;
+		}
+
+		return current;
 	}
 }

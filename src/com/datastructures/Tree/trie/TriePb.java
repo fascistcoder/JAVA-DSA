@@ -11,11 +11,16 @@ import java.util.Map;
  * @since 04/12/23
  */
 public class TriePb {
+	private TrieNode root;
+
+	public TriePb() {
+		root = new TrieNode();
+	}
+
 	public static void main(String[] args) {
 		//	largestGoodInteger("4818042931906802860005960222213336669500011846936171709111");
 		//System.out.println(largestOddNumber("511213572"));
-		strStr("sadbutsad","sad");
-
+		strStr("sadbutsad", "sad");
 	}
 
 	static String largestGoodInteger(String num) {
@@ -65,10 +70,13 @@ public class TriePb {
 	}
 
 	public static int strStr(String haystack, String needle) {
-		if(haystack.contains(needle)){
+		if (haystack.contains(needle)) {
 			System.out.println(haystack.indexOf(needle, 0));
 			return -1;
 		}
 		return -1;
 	}
+
+
+
 }

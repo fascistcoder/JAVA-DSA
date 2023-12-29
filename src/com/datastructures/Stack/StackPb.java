@@ -16,7 +16,11 @@ public class StackPb {
 	public static void main(String[] args) {
 		StackPb stackPb = new StackPb();
 		//	stackPb.reverseWords("i.like.this.program.very.much");
-		stackPb.firstUniqChar("abccbaacz");
+		//stackPb.firstUniqChar("abccbaacz");
+		stackPb.asteroidCollision(new int[] { 5, 10, -5 });
+		stackPb.asteroidCollision(new int[] { 5, -5 });
+		stackPb.asteroidCollision(new int[] { -2, -1, 1, 2 });
+		stackPb.asteroidCollision(new int[] { 8, -8, 10 });
 	}
 
 	public boolean isValid(String s) {
@@ -83,6 +87,41 @@ public class StackPb {
 
 		return characterQueue.peek();
 
+	}
+
+	public int[] asteroidCollision(int[] asteroids) {
+		if (asteroids.length == 1) {
+			return asteroids;
+		}
+
+		Stack<Integer> stack = new Stack<>();
+
+		for (int asteroid : asteroids) {
+			if (asteroid > 0) {
+				stack.push(asteroid);
+			} else {
+				while (!stack.isEmpty() && stack.peek() > 0 && Math.abs(asteroid) > stack.peek()) {
+					stack.pop();
+				}
+
+				if (stack.isEmpty() || stack.peek() < 0) {
+					stack.push(asteroid);
+				}
+
+				if (stack.peek() == Math.abs(asteroid)) {
+					stack.pop();
+				}
+			}
+		}
+
+		System.out.println(stack);
+		int[] res = new int[stack.size()];
+
+		for (int i = 0; i < res.length; i++) {
+			res[i] = stack.pop();
+		}
+
+		return res;
 	}
 
 }

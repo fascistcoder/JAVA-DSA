@@ -1,9 +1,13 @@
 package com.datastructures.Arrays;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Stack;
 
 /**
  * @author <a>Pulkit Aggarwal</a>
@@ -22,9 +26,121 @@ public class ArrayCodingExercise {
 		//
 		//		System.out.println(Arrays.toString(middle(arr)));
 
-		int[] nums1 = new int[] { 1,3,4,2,2};
-		int[] nums2 = new int[] { 2, 5, 6 };
-		findDuplicate(nums1);
+		int[] nums1 = new int[] {};
+		int[] nums2 = new int[] { 2 };
+		//new ArrayCodingExercise().findMedianSortedArrays(nums1, nums2);
+		//System.out.println(numMatchingSubseq("abcde", new String[] { "a", "bb", "acd", "ace" }));
+//		canConstruct("aa", "ab");
+		lengthOfLIS(new int[]{4,10,4,3,8,9});
+	}
+
+	public static int lengthOfLIS(int[] num) {
+//		int[] num = Arrays.stream(nums).distinct().toArray();
+
+		if (num.length == 1) {
+			return 1;
+		}
+
+		Stack<Integer> stack = new Stack<>();
+		stack.push(num[0]);
+
+		for (int i = 1; i < num.length; i++) {
+			if(stack.contains(num[i])){
+				continue;
+			}
+
+			if(num[i] > stack.peek()){
+				stack.push(num[i]);
+			} else {
+				stack.pop();
+				stack.push(num[i]);
+			}
+		}
+		System.out.println(stack);
+		return stack.size();
+	}
+
+	public static boolean canConstruct(String ransomNote, String magazine) {
+		Map<Character, Integer> map = new HashMap<>();
+
+		for (char c : magazine.toCharArray()) {
+			map.put(c, map.getOrDefault(c, 0) + 1);
+		}
+
+		for (char c : ransomNote.toCharArray()) {
+			if (map.containsKey(c)) {
+				map.put(c, map.getOrDefault(c, 0) - 1);
+				if (map.get(c) < -1) {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	public int[] twoSumd(int[] numbers, int target) {
+		int[] disArray = Arrays.stream(numbers).distinct().toArray();
+		int[] res = new int[2];
+
+		int i = 0;
+		int j = disArray.length - 1;
+
+		while (i < j) {
+			int sum = numbers[i] + numbers[j];
+
+			if (sum == target) {
+				res[0] = i + 1;
+				res[1] = j + 1;
+				return res;
+			} else if (sum < 0) {
+				i++;
+			} else {
+				j--;
+			}
+		}
+		return res;
+	}
+
+	public List<List<Integer>> threeSum(int[] nums) {
+		List<List<Integer>> res = new ArrayList<>();
+		List<Integer> list = new ArrayList<>();
+		Arrays.sort(nums);
+
+		for (int i = 0; i < nums.length - 1; i++) {
+
+			if (i > 0 && nums[i] == nums[i - 1]) {
+				continue;
+			}
+
+			int j = i + 1;
+			int k = nums.length - 1;
+
+			while (j < k) {
+				int sum = nums[i] + nums[j] + nums[k];
+				if (sum == 0) {
+					list.add(nums[i]);
+					list.add(nums[j]);
+					list.add(nums[k]);
+					while (j < k && nums[j] == nums[j + 1]) {
+						j++;
+					}
+					while (j < k && nums[k] == nums[k - 1]) {
+						k--;
+					}
+					j++;
+					k--;
+				} else if (sum < 0) {
+					j++;
+				} else {
+					k--;
+				}
+			}
+			res.add(list);
+		}
+		return res;
 	}
 
 	public static int[] middle(int[] arr) {
@@ -254,15 +370,32 @@ public class ArrayCodingExercise {
 		return -1;
 	}
 
-	public static void merge(int[] nums1, int m, int[] nums2, int n) {
+	public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+		int[] median = merge(nums1, nums1.length, nums2, nums2.length);
+		double ans = 0;
+
+		if (median == null) {
+			return 0.0;
+		}
+
+		if (median.length % 2 != 0) {
+			ans = (double) median[median.length / 2];
+		} else {
+			int ele1 = (median.length) / 2;
+			int ele2 = (median.length) / 2 - 1;
+			ans = (double) (median[ele1] + median[ele2]) / 2;
+		}
+		return ans;
+	}
+
+	public static int[] merge(int[] nums1, int m, int[] nums2, int n) {
 
 		if (m == 1 && n == 0) {
-			return;
+			return nums1;
 		}
 
 		if (m == 0 && n == 1) {
-			nums1[0] = nums2[0];
-			return;
+			return nums2;
 		}
 
 		int i = 0;
@@ -287,13 +420,7 @@ public class ArrayCodingExercise {
 			res[k++] = nums2[j++];
 		}
 
-		int l = 0;
-
-		for (int num : res) {
-			nums1[l] = num;
-			l++;
-		}
-
+		return res;
 	}
 
 	public int[] sortedSquares(int[] nums) {
@@ -313,13 +440,13 @@ public class ArrayCodingExercise {
 		int slow = nums[0];
 		int fast = nums[0];
 
-		do{
+		do {
 			slow = nums[slow];
 			fast = nums[nums[fast]];
-		}while (slow != fast);
+		} while (slow != fast);
 
 		slow = nums[0];
-		while (slow != fast){
+		while (slow != fast) {
 			slow = nums[slow];
 			fast = nums[fast];
 		}
@@ -327,4 +454,225 @@ public class ArrayCodingExercise {
 		return slow;
 	}
 
+	public static int findKthLargest(int[] nums, int k) {
+		PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+
+		for (int num : nums) {
+			priorityQueue.add(num);
+		}
+
+		System.out.println(priorityQueue);
+
+		int ele = 0;
+		int l = priorityQueue.size() - k + 1;
+
+		while (l != 0) {
+			ele = priorityQueue.poll();
+			l--;
+		}
+
+		System.out.println(ele);
+
+		return 1;
+	}
+
+	public static int[] topKFrequent(int[] nums, int k) {
+		Map<Integer, Integer> map = new HashMap<>();
+		int[] res = new int[k];
+
+		for (int num : nums) {
+			map.put(num, map.getOrDefault(num, 0) + 1);
+		}
+
+		PriorityQueue<Map.Entry<Integer, Integer>> maxHeap = new PriorityQueue<>((a, b) -> b.getValue() - a.getValue());
+		maxHeap.addAll(map.entrySet());
+
+		for (int i = 0; i < k; i++) {
+			res[i] = maxHeap.remove().getKey();
+		}
+
+		System.out.println(Arrays.toString(res));
+		return res;
+	}
+
+	public static String frequencySort(String s) {
+		Map<Character, Integer> map = new HashMap<>();
+		for (char c : s.toCharArray()) {
+			map.put(c, map.getOrDefault(c, 0) + 1);
+		}
+
+		PriorityQueue<Map.Entry<Character, Integer>> maxHeap = new PriorityQueue<>((a, b) -> b.getValue() - a.getValue());
+		maxHeap.addAll(map.entrySet());
+
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < map.size(); i++) {
+			int val = maxHeap.peek().getValue();
+			while (val != 0) {
+				sb.append(maxHeap.peek().getKey());
+				val--;
+			}
+			maxHeap.remove();
+		}
+
+		return sb.toString();
+
+	}
+
+	public static int percentageLetter(String s, char letter) {
+		Map<Character, Double> map = new HashMap<>();
+
+		for (char c : s.toCharArray()) {
+			map.put(c, map.getOrDefault(c, 0.0) + 1);
+		}
+
+		if (map.containsKey(letter)) {
+			double val = map.get(letter);
+			double per = val / s.length();
+			return (int) ((val / s.length()) * 100);
+		} else {
+			return 0;
+		}
+	}
+
+	public static int longestConsecutive(int[] nums) {
+		if (nums.length == 0) {
+			return 0;
+		}
+
+		HashSet<Integer> hashSet = new HashSet<>();
+
+		for (int num : nums) {
+			hashSet.add(num);
+		}
+
+		System.out.println(hashSet);
+
+		int lenght = 1;
+		int res = Integer.MIN_VALUE;
+
+		for (int num : nums) {
+			if (!hashSet.contains(num - 1)) {
+				int currSum = num;
+				while (hashSet.contains(currSum + 1)) {
+					currSum++;
+					lenght++;
+				}
+				res = Math.max(res, lenght);
+				lenght = 1;
+			}
+		}
+
+		System.out.println(lenght);
+		System.out.println(res);
+
+		return res;
+	}
+
+	public static int countZeroes(int[] array) {
+		//   TODO
+		Map<Integer, Integer> map = new HashMap<>();
+
+		for (int num : array) {
+			map.put(num, map.getOrDefault(num, 0) + 1);
+		}
+
+		return map.get(0);
+	}
+
+	public static int findRotatedIndex(int[] arr, int num) {
+		int left = 0;
+		int right = arr.length - 1;
+		int middle = 0;
+		if (right > 0 && arr[left] >= arr[right]) {
+			middle = (int) Math.floor((left + right) / 2);
+			while (arr[middle] <= arr[middle + 1]) {
+				if (arr[left] <= arr[middle]) {
+					left = middle + 1;
+				} else {
+					right = middle - 1;
+				}
+				middle = (int) Math.floor((left + right) / 2);
+				if (middle + 1 > arr.length - 1) {
+					break;
+				}
+
+			}
+			if (num >= arr[0] && num <= arr[middle]) {
+				left = 0;
+				right = middle;
+			} else {
+				left = middle + 1;
+				right = arr.length - 1;
+			}
+
+		}
+		while (left <= right) {
+			middle = (int) Math.floor((left + right) / 2);
+			if (num == arr[middle]) {
+				return middle;
+			}
+			if (num > arr[middle]) {
+				left = middle + 1;
+			} else {
+				right = middle - 1;
+			}
+		}
+		return -1;
+	}
+
+	public static boolean isSubsequence(String s, String t) {
+		int sPointer = 0;
+		int tPointer = 0;
+
+		while (sPointer < s.length() && tPointer < t.length()) {
+			if (s.charAt(sPointer) == t.charAt(tPointer)) {
+				sPointer++;
+			}
+			tPointer++;
+		}
+
+		return sPointer == s.length();
+	}
+
+	public static int appendCharacters(String s, String t) {
+		if (t.length() == 1 && s.contains(t)) {
+			return 0;
+		}
+
+		int sPointer = 0;
+		int tPointer = 0;
+		int len = 0;
+
+		while (sPointer < s.length() && tPointer < t.length()) {
+			if (s.charAt(sPointer) == t.charAt(tPointer)) {
+				sPointer++;
+				tPointer++;
+			} else {
+				len = t.length() - tPointer;
+				break;
+			}
+		}
+
+		return len;
+	}
+
+	public static int numMatchingSubseq(String s, String[] words) {
+		Map<String, Integer> hashMap = new HashMap<>();
+		int count = 0;
+
+		for (String word : words) {
+			hashMap.put(word, hashMap.getOrDefault(word, 0) + 1);
+		}
+
+		System.out.println(hashMap);
+
+		for (String word : hashMap.keySet()) {
+			if (isSubsequence(word, s)) {
+				count += hashMap.get(word);
+			}
+		}
+
+		return count;
+	}
 }
