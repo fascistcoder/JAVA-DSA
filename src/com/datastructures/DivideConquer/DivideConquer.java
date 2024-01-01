@@ -21,6 +21,13 @@ public class DivideConquer {
 				{ 7, 1, 7, 3, 7 },
 				{ 2, 9, 8, 9, 3 } }));
 
+		int[][] grid = {
+				{ 4, 7, 1, 6 },
+				{ 5, 7, 3, 9 },
+				{ 3, 2, 1, 2 },
+				{ 7, 1, 6, 3 }
+		};
+		System.out.println(new DivideConquer().noOfPathToReachLastCell(grid, 25));
 	}
 
 	/*** Question 1 ***/
@@ -41,6 +48,7 @@ public class DivideConquer {
 	}
 
 	/*** Question 2 ***/
+
 	public int maxMoneyRecursive(int[] HouseNetWorth, int currentIndex) {
 		if (currentIndex >= HouseNetWorth.length) {
 			return 0;
@@ -167,5 +175,25 @@ public class DivideConquer {
 	}
 
 	/*** Question 8 ***/
+	private int findNumberOfPaths(int[][] matrix, int row, int col, int cost) {
+		if (cost < 0) {
+			return 0;
+		} else if (row == 0 && col == 0) {
+			return (matrix[0][0] - cost == 0) ? 1 : 0;
+		} else if (row == 0) {
+			return findNumberOfPaths(matrix, 0, col - 1, cost - matrix[row][col]);
+		} else if (col == 0) {
+			return findNumberOfPaths(matrix, row - 1, 0, cost - matrix[row][col]);
+		}
+
+		int c1 = findNumberOfPaths(matrix, row - 1, col, cost - matrix[row][col]);
+		int c2 = findNumberOfPaths(matrix, row, col - 1, cost - matrix[row][col]);
+
+		return c1 + c2;
+	}
+
+	public int noOfPathToReachLastCell(int[][] matrix, int cost) {
+		return findNumberOfPaths(matrix, matrix.length - 1, matrix[0].length - 1, cost);
+	}
 
 }

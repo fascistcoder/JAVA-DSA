@@ -9,10 +9,10 @@ import java.math.BigInteger;
  */
 public class RecursionPb {
 	public static void main(String[] args) {
-		System.out.println(Fibonacci(10));
+		System.out.println(Fibonacci(6));
 		//		System.out.println(sumOfDigits(479));
-		System.out.println(power(2, 1));
-		System.out.println(dToB(7));
+		// System.out.println(power(2, 1));
+		// System.out.println(dToB(7));
 	}
 
 	public int factorial(int num) {

@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
-import java.util.Stack;
 
 /**
  * @author <a>Pulkit Aggarwal</a>
@@ -30,34 +29,49 @@ public class ArrayCodingExercise {
 		int[] nums2 = new int[] { 2 };
 		//new ArrayCodingExercise().findMedianSortedArrays(nums1, nums2);
 		//System.out.println(numMatchingSubseq("abcde", new String[] { "a", "bb", "acd", "ace" }));
-//		canConstruct("aa", "ab");
-		lengthOfLIS(new int[]{4,10,4,3,8,9});
+		//		canConstruct("aa", "ab");
+		//		System.out.println(makeEqual(new String[] { "a", "b" }));
+		System.out.println(findLHS(new int[] { 1, 3, 2, 2, 5, 2, 3, 7 }));
 	}
 
-	public static int lengthOfLIS(int[] num) {
-//		int[] num = Arrays.stream(nums).distinct().toArray();
-
-		if (num.length == 1) {
-			return 1;
+	public static int findLHS(int[] nums) {
+		HashMap<Integer, Integer> hashMap = new HashMap<>();
+		for (int num : nums) {
+			hashMap.put(num, hashMap.getOrDefault(num, 0) + 1);
 		}
 
-		Stack<Integer> stack = new Stack<>();
-		stack.push(num[0]);
+		int res = 0;
 
-		for (int i = 1; i < num.length; i++) {
-			if(stack.contains(num[i])){
-				continue;
+		for (int num : nums) {
+			int l = 0;
+			if (hashMap.containsKey(num + 1)) {
+				l += hashMap.get(num) + hashMap.get(num + 1);
 			}
+			res = Math.max(res, l);
+		}
 
-			if(num[i] > stack.peek()){
-				stack.push(num[i]);
-			} else {
-				stack.pop();
-				stack.push(num[i]);
+		return res;
+	}
+
+	public static boolean makeEqual(String[] words) {
+		HashMap<Character, Integer> hashMap = new HashMap<>();
+
+		for (String word : words) {
+			for (int i = 0; i < word.length(); i++) {
+				hashMap.put(word.charAt(i), hashMap.getOrDefault(word.charAt(i), 0) + 1);
 			}
 		}
-		System.out.println(stack);
-		return stack.size();
+
+		int l = words.length;
+
+		for (int length : hashMap.values()) {
+			if (length % l != 0) {
+				return false;
+			}
+		}
+
+		return true;
+
 	}
 
 	public static boolean canConstruct(String ransomNote, String magazine) {
@@ -81,7 +95,7 @@ public class ArrayCodingExercise {
 		return true;
 	}
 
-	public int[] twoSumd(int[] numbers, int target) {
+	public int[] twoSumD(int[] numbers, int target) {
 		int[] disArray = Arrays.stream(numbers).distinct().toArray();
 		int[] res = new int[2];
 
